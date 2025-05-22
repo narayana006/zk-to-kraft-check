@@ -178,7 +178,7 @@ Each finding names its source. "3.9 docs" is the migration section of the Kafka 
 
 | Check | Rule |
 |---|---|
-| Kafka version | 4.0+ has no ZooKeeper mode. 3.4 and older predate a usable migration. 3.5 and 3.6 document it as early access, not for production. |
+| Kafka version | 4.0+ has no ZooKeeper mode. 3.4 and older predate a usable migration. 3.5 documents it as early access, not for production. 3.6 was the first production-ready release for migration, but this tool does not cover it: its rules are written for 3.7 to 3.9. |
 | `inter.broker.protocol.version` | Must match the running release line (for example `3.9`); a lower value blocks. Unset is fine on 3.x, where it defaults to the newest version the broker supports. |
 | `broker.id` | Must be set to a non-negative integer: generated ids are incompatible with migration. Must not exceed `reserved.broker.max.id` (default 1000) while id generation is enabled. Must be unique across the files, and must not collide with `--controller-ids`. |
 | JBOD (`log.dirs` with several directories) | Not supported in KRaft before 3.7; from 3.7 it needs `inter.broker.protocol.version` 3.7-IV2 or higher. |

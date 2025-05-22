@@ -28,7 +28,7 @@ def test_clean_3_9_cluster_has_no_findings(broker):
     ("2.8.2", "version-too-old"),
     ("3.4.1", "version-too-old"),
     ("3.5.2", "version-early-access"),
-    ("3.6.2", "version-early-access"),
+    ("3.6.2", "version-not-covered"),
 ])
 def test_versions_that_cannot_migrate(broker, version, expected):
     findings, _ = check(version, broker(inter__broker__protocol__version=None))

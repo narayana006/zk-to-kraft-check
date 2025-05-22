@@ -94,7 +94,18 @@ def check_version(version: KafkaVersion) -> list[Finding]:
             "Upgrade the brokers to 3.9.x while still in ZooKeeper mode, then migrate.",
             "3.4 docs: KRaft Missing Features",
         )]
-    if line < (3, 7):
+    if line == (3, 6):
+        return [Finding(
+            "version-not-covered", BLOCKER,
+            "Kafka 3.6 can migrate, but this tool does not check it",
+            "Kafka 3.6.0 was the first release to describe ZooKeeper to KRaft migration as production "
+            "ready, and the project advises upgrading to 3.6.2 or later first. Clusters that use JBOD "
+            "cannot be migrated on 3.6. The rules in this tool cover the 3.7, 3.8 and 3.9 lines only.",
+            "Upgrade the brokers to 3.9.x while still in ZooKeeper mode and run this check again, "
+            "or follow the 3.6 migration documentation by hand.",
+            "Apache Kafka 3.6.0 release announcement; 3.6 docs: ZooKeeper to KRaft Migration",
+        )]
+    if line < (3, 6):
         return [Finding(
             "version-early-access", BLOCKER,
             f"Migration in Kafka {version.line_str} is early access",
